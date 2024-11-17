@@ -55,3 +55,14 @@
     color: #ff6347;
     /* Tomato color */
 }
+
+@media (max-width: 800px) {
+    .navbar-options {
+        flex-direction: column;
+        gap: px;
+    }
+
+    .navlogo {
+        height: 40px;
+    }
+}

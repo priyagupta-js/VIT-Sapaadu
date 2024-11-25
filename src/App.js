@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import LoginSignUp from '../src/pages/Login SignUp/LoginSignUp';
 import Home from '../src/pages/Homepage/Homepage';
-import Homepage from "../src/pages/Homepage/Homepage";
-// import Menu from './Components/Menu/Menu';
+// import Homepage from "../src/pages/Homepage/Homepage";
+import Menu from '../src/pages/Menu/Menu';
 // import Cart from "./Components/Cart/Cart";
 // import Account from "./Components/Account Page/account";
 // import './App.css';
@@ -76,6 +76,7 @@ const App = () => {
 */
   return (
     <Router>
+    <Menu />
       <Routes>
         <Route path="/signup" element={<LoginSignUp />} />
         <Route path="/home" element={<Home />} />

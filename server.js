@@ -19,7 +19,7 @@ app.use(cors(corsOptions));
  // To parse JSON body
 app.use(express.json());
 
-const URL = "mongodb+srv://pg0019:admin@cluster0.cfqew.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const URL = "mongodb+srv://pgupta2024:2024@cluster0.ji3vg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 // MongoDB connection
 mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to MongoDB'))

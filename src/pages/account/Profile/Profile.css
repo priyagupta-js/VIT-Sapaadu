@@ -1,0 +1,37 @@
+.profile-section {
+    width: 50%;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-details label {
+    display: block;
+    font-weight: bold;
+}
+
+.profile-details p,
+.profile-details input {
+    margin: 5px 0;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #ff6b35;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

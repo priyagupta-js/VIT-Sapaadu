@@ -3,9 +3,11 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+require('dotenv').config();
 
 // Initialize Express app
 const app = express();
+
 
 // Middleware
 const corsOptions = {
@@ -18,15 +20,19 @@ app.use(cors(corsOptions));
 
 // To parse JSON body
 app.use(express.json());
+const URL = process.env.MONGO_URI;
 
-const URL = "mongodb+srv://pgupta2024:priya12@cluster0.ji3vg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+// const URL = "mongodb+srv://pgupta2024:priya12@cluster0.ji3vg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 // MongoDB connection
 mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to MongoDB'))
-    .catch((err) => console.error(err));
+    .catch((err) => {
+        console.error('Error connecting to MongoDB:', err);
+        process.exit(1); // Exit process if MongoDB connection fails
+    });
 
 // MongoDB User model
-const User = mongoose.model('loginInfo', new mongoose.Schema({
+const User = mongoose.model('logininfos', new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     number: { type: String, required: true, unique: true },
@@ -177,7 +183,7 @@ app.post('/login', async (req, res) => {
         }
 
         // Generate JWT token
-        const token = jwt.sign({ userId: user._id }, "your_jwt_secret", { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
         return res.status(200).json({ message: 'Login successful', token });
     } catch (err) {
@@ -186,8 +192,9 @@ app.post('/login', async (req, res) => {
     }
 });
 
+
 // Start the Express server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000; // Use environment variable for port
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

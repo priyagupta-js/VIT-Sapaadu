@@ -4,7 +4,7 @@ import mainlogo from '../../assets/logo.png';
 import './NavBar.css';
 
 
-function NavBar(){
+function NavBar() {
     const navigate = useNavigate();
     const handleAccountClick = () => {
         navigate(`/account`);

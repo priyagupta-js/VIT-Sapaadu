@@ -5,6 +5,11 @@ import Home from '../src/pages/Homepage/Homepage';
 import Menu from '../src/pages/Menu/Menu';
 import Cart from "./pages/Cart/Cart";
 import Account from "./pages/account/Account";
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+// const ProtectedRoute = ({ element, ...rest }) => {
+//   const token = localStorage.getItem("token"); // Check if token exists in localStorage
+//   return token ? element : <Navigate to="/signup" />; // If no token, redirect to login
+// };
 // import './App.css';
 
 const App = () => {
@@ -91,6 +96,11 @@ const App = () => {
           }
         />
         <Route path="/account" element={<Account />} />
+        {/* Protected Route */}
+        <Route
+          path="/dashboard"
+          element={<ProtectedRoute element={<Home />} />}
+        />
         <Route path="/" element={<Navigate to="/signup" />} />
 
       </Routes>

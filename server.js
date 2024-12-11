@@ -34,7 +34,7 @@ const User = mongoose.model('loginInfo', new mongoose.Schema({
     password: { type: String, required: true },
 }));
 
-const Menu = mongoose.model('fooditem', new mongoose.Schema({
+const Menu = mongoose.model('fooditems', new mongoose.Schema({
     name: String,
     price: Number,
     rating: Number,
@@ -42,6 +42,21 @@ const Menu = mongoose.model('fooditem', new mongoose.Schema({
     description: String,
     image: String
 }));
+
+// Route to get all food items
+app.get('/api/items', async (req, res) => {
+    console.log("Fetching food items...");  // Add logging for debugging
+    try {
+        const items = await Menu.find();
+        res.json(items);
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        res.status(500).send("Server Error");
+    }
+});
+
+
+
 // const Menu = mongoose.model('Menu', VitSapaaduSchema);
 
 // const Cafe = mongoose.model('Cafe', new mongoose.Schema({
@@ -63,29 +78,19 @@ const Menu = mongoose.model('fooditem', new mongoose.Schema({
 
 // Assuming Express and Mongoose setup is already done
 
-app.get('/api/user/:email', async (req, res) => {
-    try {
-        const user = await User.findOne({ email: req.params.email });
-        if (!user) {
-            return res.status(404).send("User not found");
-        }
-        res.json(user);
-    } catch (err) {
-        res.status(500).send("Error retrieving user data");
-    }
-});
+// app.get('/api/user/:email', async (req, res) => {
+//     try {
+//         const user = await User.findOne({ email: req.params.email });
+//         if (!user) {
+//             return res.status(404).send("User not found");
+//         }
+//         res.json(user);
+//     } catch (err) {
+//         res.status(500).send("Error retrieving user data");
+//     }
+// });
 
 
-// Route to get all food items
-app.get('/api/items', async (req, res) => {
-    try {
-        const items = await Menu.find();
-        res.json(items);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("Server Error");
-    }
-});
 
 // // Add a new food item (optional, for testing purposes)
 // app.post('/api/items', async (req, res) => {

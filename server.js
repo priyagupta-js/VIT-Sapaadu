@@ -10,16 +10,16 @@ const app = express();
 // Middleware
 const corsOptions = {
     // React frontend address
-    origin: 'http://localhost:3000',  
+    origin: 'http://localhost:3000',
     methods: ['GET', 'POST'],
 };
 app.use(cors(corsOptions));
 
 
- // To parse JSON body
+// To parse JSON body
 app.use(express.json());
 
-const URL = "mongodb+srv://pgupta2024:2024@cluster0.ji3vg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const URL = "mongodb+srv://pgupta2024:priya12@cluster0.ji3vg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 // MongoDB connection
 mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to MongoDB'))
@@ -29,19 +29,19 @@ mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })
 const User = mongoose.model('loginInfo', new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    number:{ type: String, required: true, unique: true },
+    number: { type: String, required: true, unique: true },
     regNo: { type: String, required: true, unique: true },
     password: { type: String, required: true },
 }));
 
-// const Menu = mongoose.model('fooditem', new mongoose.Schema({
-//     name: String,
-//     price: Number,
-//     rating: Number,
-//     reviews: Number,
-//     description: String,
-//     image: String
-// }));
+const Menu = mongoose.model('fooditem', new mongoose.Schema({
+    name: String,
+    price: Number,
+    rating: Number,
+    reviews: Number,
+    description: String,
+    image: String
+}));
 // const Menu = mongoose.model('Menu', VitSapaaduSchema);
 
 // const Cafe = mongoose.model('Cafe', new mongoose.Schema({
@@ -77,15 +77,15 @@ app.get('/api/user/:email', async (req, res) => {
 
 
 // Route to get all food items
-// app.get('/api/items', async (req, res) => {
-//     try {
-//         const items = await Menu.find();
-//         res.json(items);
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).send("Server Error");
-//     }
-// });
+app.get('/api/items', async (req, res) => {
+    try {
+        const items = await Menu.find();
+        res.json(items);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Server Error");
+    }
+});
 
 // // Add a new food item (optional, for testing purposes)
 // app.post('/api/items', async (req, res) => {
@@ -131,7 +131,7 @@ app.get('/api/user/:email', async (req, res) => {
 
 // Route for user registration
 app.post('/register', async (req, res) => {
-    const { name, email,number, regNo, password } = req.body;
+    const { name, email, number, regNo, password } = req.body;
 
     try {
         // Check if the registration number already exists
@@ -144,7 +144,7 @@ app.post('/register', async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create a new user
-        const newUser = new User({ name, email, number,regNo, password: hashedPassword });
+        const newUser = new User({ name, email, number, regNo, password: hashedPassword });
         await newUser.save();
 
         return res.status(201).json({ message: 'User registered successfully' });

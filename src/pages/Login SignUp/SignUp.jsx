@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
     const [name, setName] = useState('');
-    const [usn, setUsn] = useState('');
+    const [regNo, setRegno] = useState('');
     const [email, setEmail] = useState('');
-    const [phoneno, setPhone] = useState('');
+    const [number, setNumber] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -18,7 +18,7 @@ const Signup = () => {
         setLoading(true);
         setError('');
 
-        if (!name || !usn || !email || !password) {
+        if (!name || !regNo || !email ||!number || !password) {
             setError('Please fill in all fields');
             setLoading(false);
             return;
@@ -30,7 +30,7 @@ const Signup = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, usn, email, password }),
+                body: JSON.stringify({ name,email,number,regNo, password }),
             });
 
             if (!response.ok) {
@@ -67,10 +67,10 @@ const Signup = () => {
                     <input
                         placeholder="Register Number"
                         className="input"
-                        id='usn'
+                        id='regNo'
                         type="text"
-                        value={usn}
-                        onChange={(e) => setUsn(e.target.value)}
+                        value={regNo}
+                        onChange={(e) => setRegno(e.target.value)}
                     />
                     <input
                         placeholder="Email ID"
@@ -83,10 +83,10 @@ const Signup = () => {
                     <input
                         placeholder="Phone Number"
                         className="input"
-                        id='phoneno'
+                        id='number'
                         type="number"
-                        value={phoneno}
-                        onChange={(e) => setPhone(e.target.value)}
+                        value={number}
+                        onChange={(e) => setNumber(e.target.value)}
                     />
                     <input
                         placeholder="Password"

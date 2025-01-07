@@ -252,7 +252,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const [usn, setUsn] = useState('');
+    const [regNo, setRegno] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -261,7 +261,7 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         setError('');
-        if (!usn || !password) {
+        if (!regNo || !password) {
             setError('Please fill in all fields');
             return;
         }
@@ -273,7 +273,7 @@ const Login = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ usn, password }),
+                body: JSON.stringify({ regNo, password }),
             });
 
             if (!response.ok) {
@@ -282,7 +282,7 @@ const Login = () => {
 
             const data = await response.json();
             localStorage.setItem('token', data.token);
-            navigate('/home'); // Use navigate for redirection
+            navigate('/Homepage'); // Use navigate for redirection
         } catch (err) {
             setError(err.message);
         } finally {
@@ -303,8 +303,8 @@ const Login = () => {
                         className="input"
                         id='regNo'
                         type="text"
-                        value={usn}
-                        onChange={(e) => setUsn(e.target.value)}
+                        value={regNo}
+                        onChange={(e) => setRegno(e.target.value)}
                     />
                     <input
                         placeholder="Password"

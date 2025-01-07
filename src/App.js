@@ -82,7 +82,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
-      <Route path="/login" element={<LoginSignUp />}/>
+        <Route path="/login" element={<LoginSignUp />}/>
         <Route path="/signup" element={<SignUp />} />
         <Route path="/home" element={<Home />} />
         <Route path="/menu" element={<Menu addToCart={addToCart} cartItems={cartItems} />} />
@@ -103,7 +103,7 @@ const App = () => {
           path="/dashboard"
           element={<ProtectedRoute element={<Home />} />}
         />
-        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="*" element={<Navigate to="/login" />} />
 
       </Routes>
     </Router>

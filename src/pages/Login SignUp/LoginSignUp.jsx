@@ -268,7 +268,7 @@ const Login = () => {
 
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:3000/login', {
+            const response = await fetch('http://localhost:5000/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -282,7 +282,7 @@ const Login = () => {
 
             const data = await response.json();
             localStorage.setItem('token', data.token);
-            navigate('/Homepage'); // Use navigate for redirection
+            navigate('/home'); // Use navigate for redirection
         } catch (err) {
             setError(err.message);
         } finally {

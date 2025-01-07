@@ -18,24 +18,25 @@ const Signup = () => {
         setLoading(true);
         setError('');
 
-        if (!name || !regNo || !email ||!number || !password) {
+        if (!name || !regNo || !email || !number || !password) {
             setError('Please fill in all fields');
             setLoading(false);
             return;
         }
 
         try {
-            const response = await fetch('http://localhost:3000/signup', { // Make sure the URL is correct
+            const response = await fetch('http://localhost:5000/register', { // Make sure the URL is correct
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name,email,number,regNo, password }),
+                body: JSON.stringify({ name, email, number, regNo, password }),
             });
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.errors[0]?.msg || 'Signup failed');
+                console.error(errorData); // Log the error details for debugging
+                throw new Error(errorData.error || 'Signup failed');
             }
 
             console.log('Signed up successfully');

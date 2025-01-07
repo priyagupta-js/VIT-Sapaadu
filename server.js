@@ -12,8 +12,9 @@ const app = express();
 // Middleware
 const corsOptions = {
     // React frontend address
-    origin: 'http://localhost:3000',
+    // origin: 'http://localhost:3000',
     methods: ['GET', 'POST'],
+    credentials: true,
 };
 app.use(cors(corsOptions));
 

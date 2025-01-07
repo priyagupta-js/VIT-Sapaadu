@@ -30,7 +30,7 @@ mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })
         process.exit(1); // Exit process if MongoDB connection fails
     });
 
-// MongoDB User model
+// MongoDB Login model
 const User = mongoose.model('logininfos', new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
@@ -39,6 +39,7 @@ const User = mongoose.model('logininfos', new mongoose.Schema({
     password: { type: String, required: true },
 }));
 
+// MOngoDB fetch menu model
 const Menu = mongoose.model('fooditems', new mongoose.Schema({
     name: String,
     price: Number,
@@ -48,7 +49,7 @@ const Menu = mongoose.model('fooditems', new mongoose.Schema({
     image: String
 }));
 
-// Route to get all food items
+// Route to fetch all food items in menu
 app.get('/api/items', async (req, res) => {
     console.log("Fetching food items...");  // Add logging for debugging
     try {
@@ -59,85 +60,6 @@ app.get('/api/items', async (req, res) => {
         res.status(500).send("Server Error");
     }
 });
-
-
-
-// const Menu = mongoose.model('Menu', VitSapaaduSchema);
-
-// const Cafe = mongoose.model('Cafe', new mongoose.Schema({
-//     name: String,
-//     foodTypes: [String],
-// }));
-
-
-// app.get('/api/cafes', async (req, res) => {
-//     try {
-//         const cafes = await Cafe.find();
-//         res.json(cafes);
-//     } catch (error) {
-//         console.error('Error fetching cafes:', error);
-//         res.status(500).json({ error: 'Error fetching cafes' });
-//     }
-// });
-
-
-// Assuming Express and Mongoose setup is already done
-
-// app.get('/api/user/:email', async (req, res) => {
-//     try {
-//         const user = await User.findOne({ email: req.params.email });
-//         if (!user) {
-//             return res.status(404).send("User not found");
-//         }
-//         res.json(user);
-//     } catch (err) {
-//         res.status(500).send("Error retrieving user data");
-//     }
-// });
-
-
-
-// // Add a new food item (optional, for testing purposes)
-// app.post('/api/items', async (req, res) => {
-//     try {
-//         const { name, price, rating, reviews, description, image } = req.body;
-//         const newItem = new Menu({ name, price, rating, reviews, description, image });
-//         await newItem.save();
-//         res.status(201).json(newItem);
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).send("Server Error");
-//     }
-// });
-
-
-// app.post('/api/items', (req, res) => {
-//     const { name, price, rating, reviews, description, image } = req.body;
-
-//     const newFoodItem = new Menu({
-//         name,
-//         price,
-//         rating,
-//         reviews,
-//         description,
-//         image
-//     });
-
-//     newFoodItem.save()
-//         .then((foodItem) => {
-//             res.status(201).json({
-//                 message: 'Food item added successfully!',
-//                 foodItem
-//             });
-//         })
-//         .catch((error) => {
-//             res.status(500).json({
-//                 message: 'Error adding food item.',
-//                 error: error.message
-//             });
-//         });
-// });
-
 
 // Route for user registration
 app.post('/register', async (req, res) => {

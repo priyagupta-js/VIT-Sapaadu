@@ -6,6 +6,7 @@ import Menu from '../src/pages/Menu/Menu';
 import Cart from "./pages/Cart/Cart";
 import Account from "./pages/account/Account";
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import SignUp from "./pages/Login SignUp/SignUp";
 // const ProtectedRoute = ({ element, ...rest }) => {
 //   const token = localStorage.getItem("token"); // Check if token exists in localStorage
 //   return token ? element : <Navigate to="/signup" />; // If no token, redirect to login
@@ -81,7 +82,8 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/signup" element={<LoginSignUp />} />
+      <Route path="/login" element={<LoginSignUp />}/>
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/home" element={<Home />} />
         <Route path="/menu" element={<Menu addToCart={addToCart} cartItems={cartItems} />} />
         <Route
@@ -101,7 +103,7 @@ const App = () => {
           path="/dashboard"
           element={<ProtectedRoute element={<Home />} />}
         />
-        <Route path="/" element={<Navigate to="/signup" />} />
+        <Route path="/" element={<Navigate to="/login" />} />
 
       </Routes>
     </Router>
